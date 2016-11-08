@@ -252,7 +252,7 @@ namespace DynamoPancakeBot
             string timeZone;
             if (localZone.IsDaylightSavingTime(fileCreated)) timeZone = localZone.DaylightName;
             else timeZone = localZone.StandardName;
-            string mainHeader = @";PancakePainter v1.2.0-beta GCODE header start" + "\r\n" +
+            string mainHeader = @";DynamoPancakeBot GCODE header start" + "\r\n" +
                             ";Originally generated @ " + DateTime.Now.ToString("ddd MMM dd yyyy HH:mm:ss") + " GMT" + GMTOffset + " (" + timeZone + ")" + "\r\n" +
                             ";Settings used to generate this file:" + "\r\n" +
                             ";----------------------------------------\r\n" +
@@ -294,7 +294,7 @@ namespace DynamoPancakeBot
 
         internal string generateGeometry(int color)
         {
-            string geometry;
+            string geometry = "";
             // TODO: generate gCode from geometry using existing javascript
             return geometry;
         }
@@ -310,6 +310,12 @@ namespace DynamoPancakeBot
                             "M142; Bottle change" + "\r\n" +
                             "G4 P35000; Pause for 35000 milliseconds";
             return changeColor;
+        }
+
+        internal string generateMove(double x, double y)
+        {
+            string move = "G00 X" + x + " Y" + y + ";";
+            return move;
         }
 
         public bool loadHeaderFooter(string filename)
